@@ -2,14 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_sample/controller/myapp_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart';
-
 import 'package:firebase_sample/view/loginpage.dart';
 import 'package:firebase_sample/view/myapp.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
@@ -39,27 +35,32 @@ class AuthController extends GetxController {
       email = user.email;
       update();
       gettinguserdetails();
-      // checkingProfilePicture();
-      Get.offAll(() => MyApp(
+      Get.offAll(() =>
+          MyApp(
             email: user.email,
           ));
     }
   }
 
   var datas;
+  var department;
+  var age;
   gettinguserdetails() {
     var document =
         FirebaseFirestore.instance.collection(email!).doc("userDetails");
     document.get().then((value) {
       datas = value['name'];
+      age = value['age'];
+      department = value['department'];
       print(datas);
       update();
     }).whenComplete(() => checkingProfilePicture());
   }
 
   checkingProfilePicture() async {
-    final destination = '$datas/$datas profile';
-    print('$datas/$datas profile');
+       print('$email/$email');
+
+    final destination = '$email/$email';
     try {
       var dbreference = FirebaseStorage.instance.ref(destination);
       url = await dbreference.getDownloadURL();

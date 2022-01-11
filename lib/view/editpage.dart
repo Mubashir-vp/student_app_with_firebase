@@ -12,7 +12,10 @@ class EditPage extends StatelessWidget {
           init: EditController(),
           builder: (controller) {
             return Scaffold(
-              body: controller.body(context: context),
+              body: SingleChildScrollView(
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: controller.body(context: context))),
             );
           }),
     );

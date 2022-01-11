@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_sample/controller/auth_controller.dart';
 import 'package:firebase_sample/model/model.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class SignUpController extends GetxController {
@@ -16,8 +14,9 @@ class SignUpController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
   collectionInstance() {
     return FirebaseFirestore.instance
-        .collection(emailController.text)
-        .doc("userDetails");
+        .collection("StudentApp")
+        .doc(emailController.text)
+        .collection("UserDetails").doc(nameController.text);
   }
 
   late Model model;

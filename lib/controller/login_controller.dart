@@ -14,7 +14,6 @@ class LoginController extends GetxController {
     var height = MediaQuery.of(context).size.height;
     void onInit() {
       super.onInit();
-      update();
     }
 
     return Column(
